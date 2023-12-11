@@ -1,22 +1,44 @@
+'use client'
+
 import React, { useEffect, useRef, useState } from 'react';
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCXw31t5iDiQ0pzAEo_-NsuYQIsLXpghuo",
+  authDomain: "pokemonwiki-91da4.firebaseapp.com",
+  projectId: "pokemonwiki-91da4",
+  storageBucket: "pokemonwiki-91da4.appspot.com",
+  messagingSenderId: "1011317117795",
+  appId: "1:1011317117795:web:4abbf7513edc6e61b27956",
+  measurementId: "G-61DBQ1FECX"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['Dashboar', 'Profile'];
+import { getAuth, signOut } from "firebase/auth";
+import { useRouter } from 'next/navigation';
+
+const pages = ['Dashboar'];
 const settings = ['Profile', 'Logout'];
 
 export const NavBar: React.FC = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const router = useRouter();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
+
     };
 
     const handleCloseNavMenu = () => {
@@ -26,6 +48,27 @@ export const NavBar: React.FC = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleMenuClick = (setting : string) => {
+        console.log(setting);
+        if (setting === 'Profile') {
+          console.log('Perfil seleccionado');
+          handleCloseUserMenu();
+        } else if (setting === 'Logout') {
+          handleSignOut();
+          handleCloseUserMenu();
+        }
+      };
+
+    const handleSignOut = () => {
+        const auth = getAuth();
+        console.log(auth.currentUser?.email);
+        signOut(auth).then(() => {
+            router.push('/login');
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
 
     const Theme = createTheme({
         palette: {
@@ -41,12 +84,12 @@ export const NavBar: React.FC = () => {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <CatchingPokemonIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#f44336'  }} />
+                        <CatchingPokemonIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#f44336' }} />
                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
-                            href="#app-bar-with-responsive-menu"
+                            href="/dashboard"
                             sx={{
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
@@ -66,10 +109,10 @@ export const NavBar: React.FC = () => {
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
-                                onClick={handleOpenNavMenu} 
+                                onClick={handleOpenNavMenu}
                                 color="inherit"
                             >
-                                <MenuIcon sx={{color: '#f44336'}}/>
+                                <MenuIcon sx={{ color: '#f44336' }} />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -120,7 +163,7 @@ export const NavBar: React.FC = () => {
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: '#f44336' , display: 'block' }}
+                                    sx={{ my: 2, color: '#f44336', display: 'block' }}
                                 >
                                     {page}
                                 </Button>
@@ -130,7 +173,7 @@ export const NavBar: React.FC = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt="Remy Sharp" src="/avatar.png" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -150,7 +193,7 @@ export const NavBar: React.FC = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting} onClick={() => handleMenuClick(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
