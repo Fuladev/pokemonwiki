@@ -9,9 +9,9 @@
 1. User1
   - Correo: user@example.com
   - Contraseña: admin01
-1. User2
+2. User2
   - Correo: user2@example.com
   - Contraseña: admin02
-1. User3
+3. User3
   - Correo: user3@example.com
   - Contraseña: admin03
