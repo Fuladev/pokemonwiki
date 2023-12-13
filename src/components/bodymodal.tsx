@@ -47,7 +47,7 @@ const BodyModal: React.FC<BodyModalProps> = ({ nameP }) => {
 
     if (loading) return (
         <section className="relative flex justify-center items-center">
-            <img className=" w-1/2" src="/load.gif" />
+            <img className=" w-1/2" src="/public/load.gif" />
 
         </section>
     );
