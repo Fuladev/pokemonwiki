@@ -38,7 +38,7 @@ export default function Page() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <img src="/load.gif" alt="Cargando..." className="w-20 h-20" /> 
+      <img src="https://i.gifer.com/Yg6z.gif" alt="Cargando..." className="w-1/2 h-auto" /> 
     </div>
   );
 };

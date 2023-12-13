@@ -19,7 +19,7 @@ const auth = getAuth(app);
 
 export default function Page() {
     const username = auth.currentUser?.email;
-    const profileImage = "/avatar.png";
+    const profileImage = "https://www.shareicon.net/data/512x512/2016/08/05/807310_gaming_512x512.png";
     const router = useRouter();
 
     const handleLogout = () => {
