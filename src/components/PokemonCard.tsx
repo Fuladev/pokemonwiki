@@ -28,7 +28,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ nameP , onClick}) => {
 
     if (loading) return (
         <section className="flex justify-center items-center">
-        <img className=" w-1/2" src="/load.gif"/>
+        <img className=" w-1/2 h-auto" src="/https://i.gifer.com/Yg6z.gif"/>
         
       </section>
     );
