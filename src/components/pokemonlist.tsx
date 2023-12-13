@@ -73,7 +73,7 @@ const PokemonList: React.FC<PokemonListProps> = () => {
   return (
     <>
       <main className="mx-auto p-3">
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           {pokemons.map((pokemon, index) => (
             <PokemonCard key={index} nameP={pokemon.name} onClick={() => handleOpen(pokemon)} />
           ))}

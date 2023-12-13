@@ -52,21 +52,23 @@ export const NavBar: React.FC = () => {
     const handleMenuClick = (setting : string) => {
         console.log(setting);
         if (setting === 'Profile') {
-          console.log('Perfil seleccionado');
+          router.push('/profile');
           handleCloseUserMenu();
         } else if (setting === 'Logout') {
           handleSignOut();
           handleCloseUserMenu();
+        }else if (setting === 'Dashboar'){
+            router.push('/dashboard')
+            handleCloseNavMenu();
         }
       };
 
     const handleSignOut = () => {
         const auth = getAuth();
-        console.log(auth.currentUser?.email);
         signOut(auth).then(() => {
             router.push('/login');
         }).catch((error) => {
-            // An error happened.
+            console.log(error);
         });
     }
 
@@ -133,7 +135,7 @@ export const NavBar: React.FC = () => {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <MenuItem key={page} onClick={() => handleMenuClick(page)}>
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
                                 ))}
@@ -162,7 +164,7 @@ export const NavBar: React.FC = () => {
                             {pages.map((page) => (
                                 <Button
                                     key={page}
-                                    onClick={handleCloseNavMenu}
+                                    onClick={() => handleMenuClick(page)}
                                     sx={{ my: 2, color: '#f44336', display: 'block' }}
                                 >
                                     {page}

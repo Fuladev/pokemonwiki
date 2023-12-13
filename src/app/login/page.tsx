@@ -44,7 +44,6 @@ export default function Page() {
 
 
     const handleSubmit = async () => {
-        console.log(email, password);
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
