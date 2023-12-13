@@ -7,8 +7,9 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ nameP , onClick}) => {
-    const [pokemon, setPokemon] = useState(true);
+    const [pokemon, setPokemon] = useState<any>();
     const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         const loadData = async () => {
@@ -36,7 +37,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ nameP , onClick}) => {
         <div className="max-w-xs rounded-lg overflow-hidden shadow-lg pokemon-card" onClick={onClick}>
 
             <div className="relative">
-                <img className="w-full h-auto bg-red-200" src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <img className="w-full h-auto bg-red-200" src={pokemon.sprites.front_default}  />
                 <span className=" absolute bottom-0 right-3 mb-2  inline-block bg-opacity-75 bg-red-400 rounded-full px-3 py-1 text-sm font-semibold text-white  ">Peso: {pokemon.weight} kg</span>
             </div>
             <div className="px-6 py-2">

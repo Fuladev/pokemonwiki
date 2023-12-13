@@ -9,7 +9,7 @@ interface BodyModalProps {
 
 
 const BodyModal: React.FC<BodyModalProps> = ({ nameP }) => {
-    const [pokemon, setPokemon] = useState(true);
+    const [pokemon, setPokemon] = useState<any>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -27,15 +27,16 @@ const BodyModal: React.FC<BodyModalProps> = ({ nameP }) => {
         loadData();
     }, []);
 
+
     const list = [];
-    const llist = pokemon.abilities?.length;
+    const llist = pokemon?.abilities?.length ?? '';
 
     for (let i = 0; i < llist; i++) {
         list.push(pokemon.abilities[i].ability.name);
     }
 
     const listS = [];
-    const nlist = pokemon.stats?.length;
+    const nlist = pokemon?.stats?.length;
     for (let i = 0; i < nlist; i++) {
         listS.push(pokemon.stats[i].stat.name + ' : ' +pokemon.stats[i].base_stat);
         
@@ -59,7 +60,7 @@ const BodyModal: React.FC<BodyModalProps> = ({ nameP }) => {
                         <img className="w-full h-auto rounded-md shadow-md bg-red-200" src={pokemon.sprites.front_default} alt={pokemon.name} />
                     </Grid>
                     <Grid item xs={6} md={6}>
-                        <img className="w-full h-auto rounded-md shadow-md bg-red-200" src={pokemon.sprites.front_shiny || '/no_shiny.png'} alt={pokemon.name} />
+                        <img className="w-full h-auto  bg-red-200" src={pokemon.sprites.front_shiny || '/no_shiny.png'} alt={pokemon.name} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
                         <div className='relative md:absolute md:right-auto md:top-auto top-3 left-auto'>
