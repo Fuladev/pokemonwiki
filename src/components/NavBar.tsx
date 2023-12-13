@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import MenuIcon from '@mui/icons-material/Menu';
+import Image from 'next/image';
 
 import { initializeApp } from 'firebase/app';
 
@@ -175,7 +176,7 @@ export const NavBar: React.FC = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/avatar.png" />
+                                    <Avatar alt="Remy Sharp" src="https://www.shareicon.net/data/512x512/2016/08/05/807310_gaming_512x512.png" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
